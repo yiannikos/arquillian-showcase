@@ -24,6 +24,7 @@
                 <module>ejb</module>
                 <module>ejb-testng</module>
                 <module>cdi-ejb</module>
+                <module>daemon</module>
                 <!-- jms only works on JBoss AS 6, add queue/test to server/default/deploy/hornetq/hornetq-jms.xml -->
                 <!--
                 <module>jms</module>
