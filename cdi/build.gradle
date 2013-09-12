@@ -2,18 +2,18 @@ apply plugin: JavaPlugin
 
 buildDir = 'target/gradle-build'
 
-libraryVersions = [
-    junit: '4.8.1', arquillian: '1.0.0.Final', jbossJavaeeSpec: '1.0.0.Final', weld: '1.1.1.Final',
-    slf4j: '1.5.10', log4j: '1.2.14', jbossAS6: '6.0.0.Final', glassfish: '3.1.2', cdi: '1.0-SP4',
-    hamcrest: '1.2', jbossAS7: '7.1.1.Final', shrinkwrapDesc: '2.0.0-alpha-2'
+ext.libraryVersions = [
+    junit: '4.8.1', arquillian: '1.1.1.Final', jbossJavaeeSpec: '1.0.0.Final', weld: '1.1.1.Final',
+    slf4j: '1.5.10', log4j: '1.2.14', jbossAS6: '6.0.0.Final', glassfish: '4.0-b72', cdi: '1.0-SP4',
+    hamcrest: '1.2', jbossAS7: '7.1.1.Final', shrinkwrapDesc: '2.0.0-alpha-3'
 ]
 
 repositories {
     mavenCentral()
     // enable if you want to use snapshots published locally
     //mavenRepo urls: 'file://' + System.getProperty('user.home') + '/.m2/repository'
-    mavenRepo urls: 'http://repository.jboss.org/nexus/content/groups/public'
-    mavenRepo urls: 'http://repository.jboss.org/nexus/content/repositories/deprecated'
+    mavenRepo url: 'http://repository.jboss.org/nexus/content/groups/public'
+    mavenRepo url: 'http://repository.jboss.org/nexus/content/repositories/deprecated'
 }
 
 configurations {
@@ -36,7 +36,7 @@ dependencies {
 
     testRuntime group: 'org.jboss.shrinkwrap.descriptors', name: 'shrinkwrap-descriptors-impl-javaee', version: libraryVersions.shrinkwrapDesc
 
-    weldEmbeddedTestRuntime group: 'org.jboss.arquillian.container', name: 'arquillian-weld-ee-embedded-1.1', version: '1.0.0.CR3'
+    weldEmbeddedTestRuntime group: 'org.jboss.arquillian.container', name: 'arquillian-weld-ee-embedded-1.1', version: '1.0.0.CR7'
     weldEmbeddedTestRuntime group: 'org.jboss.spec', name: 'jboss-javaee-6.0', version: libraryVersions.jbossJavaeeSpec
     weldEmbeddedTestRuntime group: 'org.jboss.weld', name: 'weld-core', version: libraryVersions.weld
     weldEmbeddedTestRuntime group: 'org.slf4j', name: 'slf4j-log4j12', version: libraryVersions.slf4j
@@ -52,8 +52,8 @@ dependencies {
     jbossAS7RemoteTestRuntime group: 'org.jboss.as', name: 'jboss-as-arquillian-container-remote', version: libraryVersions.jbossAS7
     jbossAS7RemoteTestRuntime group: 'org.jboss.spec', name: 'jboss-javaee-6.0', version: libraryVersions.jbossJavaeeSpec
 
-    glassfishEmbeddedTestRuntime group: 'org.jboss.arquillian.container', name: 'arquillian-glassfish-embedded-3.1', version: '1.0.0.CR1-SNAPSHOT'
-    glassfishEmbeddedTestRuntime group: 'org.glassfish.extras', name: 'glassfish-embedded-all', version: libraryVersions.glassfish
+    glassfishEmbeddedTestRuntime group: 'org.jboss.arquillian.container', name: 'arquillian-glassfish-embedded-3.1', version: '1.0.0.CR4'
+    glassfishEmbeddedTestRuntime group: 'org.glassfish.main.extras', name: 'glassfish-embedded-all', version: libraryVersions.glassfish
 }
 
 sourceSets {
@@ -76,8 +76,7 @@ task jbossAS7RemoteTest(type: Test)
 task glassfishEmbeddedTest(type: Test)
 
 tasks.withType(Test).matching({ t-> t.name.endsWith('Test') } as Spec).each { t ->
-    t.testClassesDir = sourceSets.test.classesDir
-    t.classpath = sourceSets.test.classes + sourceSets.main.classes + configurations[t.name + 'Runtime']
+    t.classpath = project.configurations.getByName(t.name + 'Runtime') + project.sourceSets.main.output + project.sourceSets.test.output
     if (t.name.startsWith('jbossas')) {
       t.classpath += files('src/test/resources-jbossas')
     }
@@ -89,6 +88,5 @@ test {
 }
 
 task generateWrapper(type: Wrapper) {
-    gradleVersion = '1.0-milestone-3'
-    jarFile = 'gradle-wrapper/gradle-wrapper.jar'
+    gradleVersion = '1.7'
 }
