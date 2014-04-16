@@ -22,6 +22,7 @@ import java.io.File;
 import org.jboss.arquillian.showcase.universe.model.Conference;
 import org.jboss.arquillian.showcase.universe.model.User;
 import org.jboss.arquillian.showcase.universe.repository.ConferenceRepository;
+import org.jboss.arquillian.showcase.universe.rest.ConferenceApplication;
 import org.jboss.arquillian.showcase.universe.rest.ConferenceRestEndpoint;
 import org.jboss.arquillian.showcase.universe.view.ConferenceBean;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -37,7 +38,10 @@ public class Deployments {
     public static class Backend {
     
         public static JavaArchive conference() {
-            return ShrinkWrap.create(JavaArchive.class, "conference-backend.jar")
+            return conference(true);
+        }
+        public static JavaArchive conference(boolean testable) {
+            JavaArchive jar = ShrinkWrap.create(JavaArchive.class, "conference-backend.jar")
                     // Test helpers
                     .addClasses(Models.class) 
                     // Models
@@ -45,6 +49,10 @@ public class Deployments {
                     // Descriptors
                     .addAsManifestResource(new File("src/test/resources/test-persistence.xml"), "persistence.xml")
                     .addAsManifestResource(new File("src/main/webapp/WEB-INF/beans.xml"), "beans.xml");
+            if(testable) {
+                jar.addClass(Deployments.class);
+            }
+            return jar;
         }
     }
     
@@ -60,24 +68,24 @@ public class Deployments {
                     
                     // Descriptors
                     .setWebXML(new File("src/test/resources/test-web.xml"))
-                    .addAsManifestResource(new File("src/main/webapp/WEB-INF/beans.xml"), "beans.xml")
+                    .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"), "beans.xml")
                     .addAsWebInfResource(new File("src/main/webapp/WEB-INF/faces-config.xml"), "faces-config.xml");
         }
 
         public static WebArchive rest() {
             return base("conference-rest.war")
-                    .addClasses(ConferenceRestEndpoint.class)
+                    .addClasses(ConferenceApplication.class, ConferenceRestEndpoint.class)
                     
                     // Descriptors
                     .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                    .addAsManifestResource(new File("src/main/webapp/WEB-INF/beans.xml"), "beans.xml");
+                    .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"), "beans.xml");
         }
         
         private static WebArchive base(String name) {
             return ShrinkWrap.create(WebArchive.class, name)
                     
                     // Backend library
-                    .addAsLibraries(Backend.conference());
+                    .addAsLibraries(Backend.conference(false));
         }
     }
 }

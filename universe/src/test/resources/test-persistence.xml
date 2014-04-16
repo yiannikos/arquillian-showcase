@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
-    version="1.0">
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0">
     <persistence-unit name="conference">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <jta-data-source>java:/jboss/datasources/ExampleDS</jta-data-source>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <jta-data-source>datasources/ExampleDS</jta-data-source>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+
         <properties>
+
+        	<property name="openjpa.LockTimeout" value="30000"/>
+			<property name="openjpa.jdbc.TransactionIsolation" value="read-committed" />
+			<property name="openjpa.Log" value="none" />
+			<property name="openjpa.jdbc.UpdateManager" value="operation-order" />
+			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />
             <property name="hibernate.show_sql" value="true" />
         </properties>

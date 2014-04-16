@@ -5,18 +5,58 @@
 
     <defaultProtocol type="Servlet 3.0" />
 
-<!--
+
 	<engine>
 		<property name="deploymentExportPath">target/</property>
 	</engine>
--->
-    <container qualifier="jboss" default="true">
+
+	<container qualifier="single" default="true">
+		<configuration>
+			<property name="wlpHome">${user.home}/dev/servers/wlp-2014.3.0.0</property>
+			<property name="deployType">xml</property>
+			<property name="allowConnectingToRunningServer">true</property>
+		</configuration>
+	</container>
+
+	<group qualifier="grid">
+		<container qualifier="container.active-1" default="true">
+			<configuration>
+				<property name="wlpHome">${user.home}/dev/servers/wlp-2014.3.0.0</property>
+				<property name="serverName">node1</property>
+				<property name="httpPort">9081</property>
+				<property name="deployType">xml</property>
+				<property name="allowConnectingToRunningServer">true</property>
+			</configuration>
+		</container>
+		<container qualifier="container.active-2">
+			<configuration>
+				<property name="wlpHome">${user.home}/dev/servers/wlp-2014.3.0.0</property>
+				<property name="serverName">node2</property>
+				<property name="httpPort">9082</property>
+				<property name="deployType">xml</property>
+				<property name="allowConnectingToRunningServer">true</property>
+			</configuration>
+		</container>
+		<container qualifier="container.active-3">
+			<configuration>
+				<property name="wlpHome">${user.home}/dev/servers/wlp-2014.3.0.0</property>
+				<property name="serverName">node3</property>
+				<property name="httpPort">9083</property>
+				<property name="deployType">xml</property>
+				<property name="allowConnectingToRunningServer">true</property>
+			</configuration>
+		</container>
+	</group>
+
+
+    <container qualifier="jboss">
         <configuration>
             <property name="jbossHome">${jbossHome:target/jboss-as-7.1.1.Final}</property>    
         </configuration>
     </container>
 
 	<extension qualifier="webdriver">
+		<property name="browser">firefox</property>
 		<property name="chromeDriverBinary">/home/aslak/dev/tools/chromedriver</property>
 	</extension>
     <extension qualifier="persistence">

@@ -39,13 +39,13 @@ public class Models {
     }
 
     public static Conference createRandomConference() {
-        Conference conference = new Conference("JavaZone 2012");
-        conference.setLocation("Oslo, Norway");
-        conference.setDescription("Passion for More");
+        Conference conference = new Conference("JUDCon 2014");
+        conference.setLocation("Bangalore, India");
+        conference.setDescription("Community Powered Innovation");
         
         try {
-            conference.setStart(parse("12.09.2012"));
-            conference.setEnd(parse("13.09.2012"));
+            conference.setStart(parse("30.01.2014"));
+            conference.setEnd(parse("31.01.2014"));
         }
         catch (Exception e) {
             throw new RuntimeException(e);

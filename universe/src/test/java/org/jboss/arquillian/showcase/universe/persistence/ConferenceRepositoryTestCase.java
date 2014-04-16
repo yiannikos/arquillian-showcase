@@ -69,6 +69,21 @@ public class ConferenceRepositoryTestCase {
     public void shouldBeAbleToLoadConference() throws Exception {
         Conference conference = repository.get("10");
         
-        Assert.assertEquals("JavaZone 2012", conference.getName());
+        Assert.assertEquals("JUDCon 2014", conference.getName());
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

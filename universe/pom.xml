@@ -39,7 +39,7 @@
 	    <version.jboss_eap_managed>eap-6.1.0</version.jboss_eap_managed>
 		<version.jboss_spec>3.0.0.Final</version.jboss_spec>
 		
-		<version.wlp>1.0.0.Final-SNAPSHOT</version.wlp>
+		<version.wlp>1.0.0.Beta1</version.wlp>
 		
 		<version.junit>4.8.1</version.junit>
 		<version.byteman>2.0.1</version.byteman>

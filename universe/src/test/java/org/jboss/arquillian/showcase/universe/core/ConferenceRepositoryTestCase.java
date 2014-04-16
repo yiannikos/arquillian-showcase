@@ -61,7 +61,7 @@ public class ConferenceRepositoryTestCase {
         Conference stored = transactional(new GetConference(repository, conference.getId()));
 
         Assert.assertNotNull(stored);
-
+ 
         Assert.assertEquals(conference.getName(), stored.getName());
         Assert.assertEquals(conference.getLocation(), stored.getLocation());
         Assert.assertEquals(conference.getDescription(), stored.getDescription());

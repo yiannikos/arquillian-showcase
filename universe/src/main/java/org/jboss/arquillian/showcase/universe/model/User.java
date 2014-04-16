@@ -29,7 +29,7 @@ import javax.persistence.Table;
  * @version $Revision: $
  */
 @Entity
-@Table(name = "user")
+@Table(name = "attendee")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;

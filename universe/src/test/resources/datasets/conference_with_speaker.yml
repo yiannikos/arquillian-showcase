@@ -1,8 +1,8 @@
 conference:
     - id: 10
-      name: JavaZone 2012
-      location: Oslo, Norway
-      description: Passion for More
+      name: JUDCon 2014
+      location: Bangalore, India
+      description: Community Powered Innovation
 user:
     - id: 20
       firstName: aslak

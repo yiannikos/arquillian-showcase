@@ -19,8 +19,6 @@ package org.jboss.arquillian.showcase.universe.warp;
 
 import java.net.URL;
 
-import javax.ejb.EJB;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
@@ -28,15 +26,11 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.showcase.universe.Deployments;
 import org.jboss.arquillian.showcase.universe.Models;
 import org.jboss.arquillian.showcase.universe.model.Conference;
-import org.jboss.arquillian.showcase.universe.repository.ConferenceRepository;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.arquillian.warp.Activity;
-import org.jboss.arquillian.warp.Inspection;
 import org.jboss.arquillian.warp.Warp;
 import org.jboss.arquillian.warp.WarpTest;
-import org.jboss.arquillian.warp.servlet.AfterServlet;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -53,7 +47,7 @@ public class ConferenceWebClientTestCase {
     @Deployment
     public static WebArchive deploy() {
         return Deployments.Client.web()
-                .addClass(Deployments.class);
+                .addClass(VerifyConference.class);
     }
     
     @ArquillianResource
@@ -81,28 +75,5 @@ public class ConferenceWebClientTestCase {
             }
         }).inspect(new VerifyConference(conference));
 
-    }
-    
-    public static class VerifyConference extends Inspection {
-        
-        private static final long serialVersionUID = 1L;
-
-        private Conference conference;
-        
-        @EJB
-        private ConferenceRepository manager;
-        
-        public VerifyConference(Conference conference) {
-            this.conference = conference;
-        }
-        
-        @AfterServlet
-        public void wasInserted() {
-            Conference stored = manager.get(conference.getId());
-            
-            Assert.assertEquals(conference.getName(), stored.getName());
-            Assert.assertEquals(conference.getLocation(), stored.getLocation());
-            Assert.assertEquals(conference.getDescription(), stored.getDescription());
-        }
     }
 }
