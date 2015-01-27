@@ -25,6 +25,7 @@
         <module>systemproperties</module>
         <module>resteasy</module>
         <module>weld-servlet</module>
+        <module>arquillian-decoder/arquillian-decoder</module>
     </modules>
 
 </project>
