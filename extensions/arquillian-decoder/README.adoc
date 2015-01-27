@@ -1,0 +1,249 @@
+== Arquillian Decoder Extension
+
+Arquillian Decoder Extension and the implementations which use its API give 
+you the possibility to programatically choose what test methods of your 
+Arquillian tests are going to be executed and what are going to be skipped 
+by putting your custom annotations on the test methods.
+
+The resolution of the test method execution is done during the test class 
+execution in BeforeClass phase.
+
+Currenly, there is only one implementation which uses API of the Arquillian 
+Decoder extension - Arquillian JIRA Decoder extension.
+
+=== Configuration of Arquillian Decoder extension
+
+Arquillian Decoder extension is an extension on top of which all other concrete Decoders are 
+built. When you provide some custom Decoder implementation, this extension is automatically behind it. 
+Arquillian Decoder base implementation is configured by putting the following extension definition
+into +arquillian.xml+ like this:
+
+[source,xml]
+----
+<extension qualifier="decoder">
+</extension>
+----
+
+Possible properties for +decoder+ extension:
+
+|===
+|Configuration property|Description|Default value|Possible values
+
+|+ignore+
+|No test execution resolution will be done. All test methods, even annotated with Decoder annotation, will be executed as normally.
+|false
+|true / false
+|+ignoreOnly+
+|Fully qualified class name of Decoder annotation to ignore. When such annotation is put on a test method, no test execution resolution will be performed.
+|empty string
+|Fully qualified class name of an annotation you want to ignore.
+
+|===
+
+=== Arquillian JIRA Decoder Extension
+
+In order to use JIRA Decoder extension, you have to put this dependency into your Arquillian test Maven build:
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.arquillian.extension</groupId>
+    <artifactId>arquillian-decoder-jira</artifactId>
+    <scope>test</scope>
+</dependency>    
+----
+
+As stated previously, JIRA Decoder has the base implementation automatically bundled in it so you can configure +decoder+ extension as well.
+
+=== Configuration of Arquillian JIRA Decoder Extension
+
+Arquillian JIRA Decoder extension is configured by putting the following extension definition into +arquillian.xml+ like this:
+
+[source,xml]
+----
+<extension qualifier="decoder-jira">
+</extension>
+----
+
+Possible properties for +decoder-jira+ extension:
+
+|===
+|Configuration property|Description|Default value|Possible values
+
+|+username+
+|your JIRA user name. This user name will be used to log in to JIRA instance
+|this property has to be set and has to be non-empty, otherwise it fails
+|
+|+password+
+|your JIRA password. This password will be used to log in to JIRA instance
+|this property has to be set and has to be non-empty, otherwise it fails
+|
+|+server+
+|JIRA server to connect to
+|https://issues.jboss.org
+|any address which is valid URI and URL
+|+force+
+|Even JIRA status is Unresolved or Open, this test method will be executed anyway
+|false
+|true / false
+|+closePassed+
+|If you force the execution for some test method which has status as 'Unresolved' or 'Open' and this test succeeds and this property is set to true, JIRA issue on +server+ will be automatically be modified as 'Done' and appropriate message about the issue resolving will be submitted to that JIRA issue as a comment posted by +username+.
+|false
+|true / false
+|+closingMessage+
+|Message which appears as a comment on a JIRA issue which was automatically closed.
+|This JIRA issue was automatically closed by %s with Arquillian Jira Decoder extension. ('%s' is replaced by +username+ property).
+|Any string.
+
+|===
+
+Due to security reasons, when you do not specify +server+ and +username+ or +password+ properties in +arquillian.xml+ 
+for JIRA Decoder, this extension looks for system properties +jira.decoder.server+, +jira.decoder.username+ and 
++jira.decoder.password+ respectively.
+
+You can set properties +force+ and +closePassed+ by system properties +jira.decoder.force+ and +jira.decoder.closepassed+ by setting them to "true" or "false".
+
+== Usage
+
+Let's have this test case:
+
+[source,java]
+----
+@RunWith(Arquillian.class)
+@RunAsClient
+public class TestCase
+{
+    @Test
+    @Jira("ARQ-1907")
+    public void test()
+    {
+        // this test will be run
+        // because ARQ-1907 is 'Done'
+        // so we assume that this test has to pass as well
+    }
+
+    @Test
+    @Jira("ARQ-5000")
+    public void test2()
+    {
+        // when this JIRA exists and its status is 'Unresolved' / 'Open'
+        // this test method will be skipped because you assume that
+        // if you run it, it would fail
+    }
+
+}
+----
+
+=== Automatic closing of your JIRA issues
+
+This feature is pretty cool. When some JIRA issue is unresolved, normally, it would be skipped from 
+execution. However if you force it to execute by +force+ flag on +@Jira+ annotation, and this test method
+passes with success, when you have set property +closePassed+ in your +arquillian.xml+, that JIRA will be 
+automatically marked as +Done+ on JIRA server.
+
+[source,java]
+----
+@RunWith(Arquillian.class)
+public class AutomaticClosingTestCase
+{
+    @Test
+    @Jira("ARQ-5000", force = true)
+    public void automaticClosingTest)
+    {   
+        // when this JIRA exists and its status is 'Unresolved' / 'Open'
+        // and you have forced its execution and you set 'closePassed'
+        // property in arquillian.xml to 'true',
+        // when this test method succeeds, it automatically resolves 
+        // respective JIRA issue as 'Done'
+    } 
+}
+----
+
+== How do I implement my own Decoder?
+
+Glad you asked. Because of Arquillian Decoder base extension, you are welcome to code 
+your own test method execution resolver as we did with Arquillian JIRA decoder extension.
+
+The decoder annotation you want to put on your test method (as we did with +@Jira+) have 
+to be annotated with +@Decoder+ annotation. +@Jira+ annotation looks like this:
+
+[source,java]
+----
+@Decoder // <--- you have to annotate your own annotation with this
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.METHOD })
+@Documented
+public @interface Jira
+{
+    String value() default "";
+
+    boolean force() default false;
+}
+----
+
++force+ field is optional. This is only specific for JIRA extension, maybe your decoder will use something 
+completely else.
+
+Once you have your decoder annotation in your extension, you have to write your own https://github.com/arquillian/arquillian-core/blob/master/test/spi/src/main/java/org/jboss/arquillian/test/spi/execution/TestExecutionDecider.java[TestExecutionDecider]. +TestExecutionDecider+ implementation has to be registered as a service to your Arquillian extension like this:
+
+[source,java]
+----
+public class MyLoadableExtension implements LoadableExtension
+{
+    @Override
+    public void register(ExtensionBuilder builder)
+    {
+        builder.service(TestExecutionDecider.class, MyTestExecutionDecider.class);
+        builder.service(DecoderProvider.class, BugzillaProvider.class);
+    }
+}
+----
+
+The usage of this SPI is fully explained in official http://arquillian.org/blog/2015/01/26/arquillian-core-1-1-6-Final/[Arquillian Core 1.1.6 release blog post].
+
+As described above, you have to register as a service your own 'DecoderProvider' which provides the decoding annotation like this:
+
+[source,java]
+----
+public class BugzillaProvider implements DecoderProvider
+{
+    @Override
+    public Class<? extends Annotation> provides()
+    {
+        return Bugzilla.class;
+    }
+}
+----
+
+By doing so, you can use +@Bugzilla+ annotations on your test methods. +@Bugzilla+ annotation has to be itself annotated with +@Decoder+ annotation the same way as +@Jira+ is.
+
+Finally, you have to observe +ExecutionDecisionEvent+ where you have to decide if the annotation in this event which is put on some test method is going to be executed or not.
+
+The example how we did this all for Jira Decoder is in class +JiraTestExecutionDecider+.
+
+This is the minimal scenario. Of course, your resolution can be done in a completely different way, you could resolve it against database, file, properties or what ever. It is up to you.
+
+== How do I build this extension?
+
+[source,bash]
+----
+$ mvn clean install
+----
+
+== Releasing new version
+
+In order to release new version, execute following Maven command:
+
+[source,bash]
+----
+mvn clean release:prepare release:perform
+----
+
+Then:
+
+1. Verify the build from staging repository
+2. Make sure all JIRAs are closed
+3. Release version in JIRA and create next version if not available
+4. Promote the build to the stable Maven repository
+5. Push commits and tag created by +maven-release-plugin+ to the repository.
+
