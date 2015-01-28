@@ -27,6 +27,7 @@
         <module>weld-servlet</module>
         <module>arquillian-decoder/arquillian-decoder</module>
         <module>arquillian-static-container-controller</module>
+        <module>arquillian-smart-url</module>
     </modules>
 
 </project>
