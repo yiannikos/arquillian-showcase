@@ -1,0 +1,64 @@
+== Arquillian Static Container Controller
+
+This micro extension enables you to inject ContainerController of Arquillian into the test case statically.
+
+== Usage
+
+[source,java]
+----
+@RunWith(Arquillian.class)
+@RunAsClient
+public class StaticContainerControllerTestCase
+{
+    @StaticContainerController
+    private static ContainerController containerController;
+
+    @BeforeClass
+    public static void assertContainerControllerExistInBeforeClass()
+    {
+        Assert.assertThat(containerController, is(not(nullValue())));
+    }
+
+    @Before
+    public void assertContainerControllerExistInBefore()
+    {
+        Assert.assertThat(containerController, is(not(nullValue())));
+    }
+
+    @Test
+    public void assertThatContainerControllerExistInTest()
+    {
+        Assert.assertThat(containerController, is(not(nullValue())));
+    }
+
+    @After
+    public void assertContainerControllerExistInAfter()
+    {
+        Assert.assertThat(containerController, is(not(nullValue())));
+    }
+
+    @AfterClass
+    public static void assertContainerControllerExistInAfterClass()
+    {
+        Assert.assertThat(containerController, is(not(nullValue())));
+    }
+}
+----
+
+== How to add it to class path?
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.arquillian.extension</groupId>
+    <artifactId>arquillian-static-container-controller</artifactId>
+    <version>_version_here_</version>
+</dependency>
+----
+
+== How to build?
+
+[source,bash]
+----
+$ mvn clean install
+----

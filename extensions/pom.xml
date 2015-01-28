@@ -26,6 +26,7 @@
         <module>resteasy</module>
         <module>weld-servlet</module>
         <module>arquillian-decoder/arquillian-decoder</module>
+        <module>arquillian-static-container-controller</module>
     </modules>
 
 </project>
