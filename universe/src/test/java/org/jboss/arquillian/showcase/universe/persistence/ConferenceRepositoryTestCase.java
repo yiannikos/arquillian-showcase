@@ -19,7 +19,6 @@ package org.jboss.arquillian.showcase.universe.persistence;
 
 import javax.ejb.EJB;
 
-import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.arquillian.persistence.Cleanup;
@@ -27,11 +26,9 @@ import org.jboss.arquillian.persistence.CleanupStrategy;
 import org.jboss.arquillian.persistence.ShouldMatchDataSet;
 import org.jboss.arquillian.persistence.TestExecutionPhase;
 import org.jboss.arquillian.persistence.UsingDataSet;
-import org.jboss.arquillian.showcase.universe.Deployments;
 import org.jboss.arquillian.showcase.universe.Models;
 import org.jboss.arquillian.showcase.universe.model.Conference;
 import org.jboss.arquillian.showcase.universe.repository.ConferenceRepository;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,10 +42,10 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class ConferenceRepositoryTestCase {
 
-    @Deployment
-    public static JavaArchive deploy() {
-        return Deployments.Backend.conference();
-    }
+//    @Deployment
+//    public static JavaArchive deploy() {
+//        return Deployments.Backend.conference();
+//    }
 
     @EJB
     private ConferenceRepository repository;

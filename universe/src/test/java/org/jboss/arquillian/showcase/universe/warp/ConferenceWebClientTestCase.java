@@ -21,11 +21,9 @@ import java.net.URL;
 
 import javax.ejb.EJB;
 
-import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.showcase.universe.Deployments;
 import org.jboss.arquillian.showcase.universe.Models;
 import org.jboss.arquillian.showcase.universe.model.Conference;
 import org.jboss.arquillian.showcase.universe.repository.ConferenceRepository;
@@ -36,7 +34,6 @@ import org.jboss.arquillian.warp.Warp;
 import org.jboss.arquillian.warp.WarpTest;
 import org.jboss.arquillian.warp.servlet.AfterServlet;
 import org.jboss.arquillian.warp.servlet.BeforeServlet;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,17 +44,17 @@ import org.openqa.selenium.WebDriver;
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
  */
-@RunAsClient
-@WarpTest
+
+@WarpTest @RunAsClient
 @RunWith(Arquillian.class)
 public class ConferenceWebClientTestCase {
     
-    @Deployment
-    public static WebArchive deploy() {
-        return Deployments.Client.web()
-                .addClass(Deployments.class)
-                .addAsResource("datasets/conference_with_speaker.yml", "datasets/conference_with_speaker.yml");
-    }
+//    @Deployment
+//    public static WebArchive deploy() {
+//        return Deployments.Client.web()
+//                .addClass(Deployments.class)
+//                .addAsResource("datasets/conference_with_speaker.yml", "datasets/conference_with_speaker.yml");
+//    }
     
     @ArquillianResource
     public URL baseURL;

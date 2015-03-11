@@ -22,12 +22,10 @@ import java.net.URL;
 import javax.ejb.EJB;
 
 import org.arquillian.recorder.reporter.ReportMessage;
-import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.page.InitialPage;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.showcase.universe.Deployments;
 import org.jboss.arquillian.showcase.universe.Models;
 import org.jboss.arquillian.showcase.universe.model.Conference;
 import org.jboss.arquillian.showcase.universe.repository.ConferenceRepository;
@@ -37,7 +35,6 @@ import org.jboss.arquillian.warp.Inspection;
 import org.jboss.arquillian.warp.Warp;
 import org.jboss.arquillian.warp.WarpTest;
 import org.jboss.arquillian.warp.servlet.AfterServlet;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,11 +49,11 @@ import org.openqa.selenium.WebDriver;
 @ReportMessage("Register Conference via web front end")
 public class ConferenceWebClientPageFragmentTestCase {
     
-    @Deployment
-    public static WebArchive deploy() {
-        return Deployments.Client.web()
-                .addClass(Deployments.class);
-    }
+//    @Deployment
+//    public static WebArchive deploy() {
+//        return Deployments.Client.web()
+//                .addClass(Deployments.class);
+//    }
     
 	@Drone
 	private WebDriver driver;

@@ -18,12 +18,12 @@
 	<description>Examples that demonstrate the combined use of multiple Arquillian Extensions</description>
 
 	<properties>
-		<version.arquillian_core>1.1.5.Final</version.arquillian_core>
+		<version.arquillian_core>1.1.8.Final-SNAPSHOT</version.arquillian_core>
 
 		<version.arquillian_glassfish>1.0.0.CR3</version.arquillian_glassfish>
 		<version.glassfish>3.1.1</version.glassfish>
 
-		<version.arquillian_drone>2.0.0.Alpha2</version.arquillian_drone>
+		<version.arquillian_drone>2.0.0.Alpha3</version.arquillian_drone>
 		<version.arquillian_graphene>2.1.0.Alpha1</version.arquillian_graphene>
 		<version.arquillian_recorder>1.0.0.Alpha4</version.arquillian_recorder>
 		<version.arquillian_persistence>1.0.0.Alpha7</version.arquillian_persistence>
@@ -33,7 +33,7 @@
 		<version.arquillian_jrebel>1.0.0.Alpha1-SNAPSHOT</version.arquillian_jrebel>
 		<version.arquillian_jacoco>1.0.0.Final-SNAPSHOT</version.arquillian_jacoco>
         
-        <version.selenium>2.43.1</version.selenium>
+        <version.selenium>2.45.0</version.selenium>
 
 		<version.jbossas>7.1.1.Final</version.jbossas>
 	    <version.jboss_as>7.1.1.Final</version.jboss_as>

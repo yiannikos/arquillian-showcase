@@ -26,14 +26,12 @@ import javax.xml.bind.JAXBContext;
 
 import junit.framework.Assert;
 
-import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-import org.jboss.arquillian.showcase.universe.Deployments;
 import org.jboss.arquillian.showcase.universe.Models;
 import org.jboss.arquillian.showcase.universe.model.Conference;
 import org.jboss.arquillian.test.api.ArquillianResource;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -43,13 +41,13 @@ import org.junit.runner.RunWith;
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @version $Revision: $
  */
-@RunWith(Arquillian.class)
+@RunWith(Arquillian.class) @RunAsClient
 public class ConferenceRestClientTestCase {
 
-    @Deployment(testable = false)
-    public static WebArchive deploy() {
-        return Deployments.Client.rest();
-    }
+//    @Deployment(testable = false)
+//    public static WebArchive deploy() {
+//        return Deployments.Client.rest();
+//    }
 
     private static Conference conference = Models.createRandomConference();
     

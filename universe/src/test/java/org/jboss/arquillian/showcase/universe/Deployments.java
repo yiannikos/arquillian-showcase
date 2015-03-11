@@ -49,8 +49,17 @@ public class Deployments {
     }
     
     public static class Client {
-        
-        public static WebArchive web() {
+
+       public static WebArchive full() {
+          WebArchive web = web();
+          WebArchive rest = rest();
+          
+          web.merge(rest);
+          web.setWebXML(new File("src/main/webapp/WEB-INF/web.xml"));
+          return web;
+       }
+
+       public static WebArchive web() {
             return base("conference-web.war")
                     .addClasses(ConferenceBean.class)
                     
