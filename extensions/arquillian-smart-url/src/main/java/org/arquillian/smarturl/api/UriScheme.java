@@ -42,4 +42,6 @@ public @interface UriScheme {
     String user() default "";
 
     String password() default "";
+    
+    boolean useHostnameForLocalhost() default true;
 }

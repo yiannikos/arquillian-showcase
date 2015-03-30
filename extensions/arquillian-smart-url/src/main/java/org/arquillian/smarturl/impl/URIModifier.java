@@ -51,7 +51,10 @@ public class URIModifier {
 
             String host = locatedURL.getHost();
             // we are forcing localhost replacement
-            host = host.replace("127.0.0.1", "localhost");
+            
+            if (qualifier.useHostnameForLocalhost()) {
+                host = host.replace("127.0.0.1", "localhost");    
+            }
 
             // we can't use URL constructor, as it does not understand ':' in host part
             StringBuilder sb = new StringBuilder(scheme);

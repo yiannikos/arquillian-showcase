@@ -83,6 +83,12 @@ public class UrlModifierTest {
             public SchemeName name() {
                 return scheme;
             }
+
+            @Override
+            public boolean useHostnameForLocalhost()
+            {
+                return true;
+            }
         };
     }
 }
