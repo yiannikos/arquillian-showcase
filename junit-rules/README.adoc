@@ -1,0 +1,5 @@
+= JUnit Rules support
+
+This project highlights the use cases supported by Arquillian from version `1.1.12.Final`.
+
+Please note that this module is self-contained and does not belong to the main project. After all this way is easier for you to play with it :)
