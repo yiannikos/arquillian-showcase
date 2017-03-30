@@ -1,59 +1,59 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <!-- Parent -->
-    <parent>
-        <groupId>org.jboss.arquillian.showcase</groupId>
-        <artifactId>arquillian-showcase-spring</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../</relativePath>
-    </parent>
-
-    <!-- Model Version -->
-    <modelVersion>4.0.0</modelVersion>
-
+  <!-- Parent -->
+  <parent>
     <groupId>org.jboss.arquillian.showcase</groupId>
-    <artifactId>arquillian-showcase-spring-ejb</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>arquillian-showcase-spring</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+  </parent>
 
-    <name>Arquillian Showcase Spring: EJB3</name>
-    <url>http://www.jboss.org</url>
-    <description>EJB3 Showcase of Spring Framework 3 extension for Arquillian</description>
+  <!-- Model Version -->
+  <modelVersion>4.0.0</modelVersion>
 
-    <!-- Properties -->
-    <properties>
+  <groupId>org.jboss.arquillian.showcase</groupId>
+  <artifactId>arquillian-showcase-spring-ejb</artifactId>
+  <packaging>jar</packaging>
 
-    </properties>
+  <name>Arquillian Showcase Spring: EJB3</name>
+  <url>http://www.jboss.org</url>
+  <description>EJB3 Showcase of Spring Framework 3 extension for Arquillian</description>
 
-    <!-- Dependencies -->
-    <dependencies>
+  <!-- Properties -->
+  <properties>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
+  </properties>
 
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-        </dependency>
+  <!-- Dependencies -->
+  <dependencies>
 
-        <dependency>
-            <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-service-deployer-spring-3</artifactId>
-        </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
 
-        <dependency>
-            <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-service-integration-spring-inject</artifactId>
-            <scope>test</scope>
-        </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.junit</groupId>
+      <artifactId>arquillian-junit-container</artifactId>
+    </dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-    </dependencies>
+    <dependency>
+      <groupId>org.jboss.arquillian.extension</groupId>
+      <artifactId>arquillian-service-deployer-spring-3</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.arquillian.extension</groupId>
+      <artifactId>arquillian-service-integration-spring-inject</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
 </project>

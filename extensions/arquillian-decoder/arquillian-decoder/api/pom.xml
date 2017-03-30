@@ -12,31 +12,31 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- Model Version -->
-    <modelVersion>4.0.0</modelVersion>
+  <!-- Model Version -->
+  <modelVersion>4.0.0</modelVersion>
 
-    <!-- Parent -->
-    <parent>
-        <groupId>org.arquillian.extension</groupId>
-        <artifactId>arquillian-decoder-parent</artifactId>
-        <version>1.0.0.Alpha1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
+  <!-- Parent -->
+  <parent>
+    <groupId>org.arquillian.extension</groupId>
+    <artifactId>arquillian-decoder-parent</artifactId>
+    <version>1.0.0.Alpha1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
-    <!-- Artifact Configuration -->
-    <artifactId>arquillian-decoder-api</artifactId>
-    <name>Arquillian Decoder API</name>
+  <!-- Artifact Configuration -->
+  <artifactId>arquillian-decoder-api</artifactId>
+  <name>Arquillian Decoder API</name>
 
-    <!-- Dependencies -->
-    <dependencies>
-        <dependency>
-            <groupId>org.jboss.arquillian.core</groupId>
-            <artifactId>arquillian-core-spi</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.jboss.arquillian.test</groupId>
-            <artifactId>arquillian-test-spi</artifactId>
-        </dependency>
-    </dependencies>
+  <!-- Dependencies -->
+  <dependencies>
+    <dependency>
+      <groupId>org.jboss.arquillian.core</groupId>
+      <artifactId>arquillian-core-spi</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.arquillian.test</groupId>
+      <artifactId>arquillian-test-spi</artifactId>
+    </dependency>
+  </dependencies>
 </project>

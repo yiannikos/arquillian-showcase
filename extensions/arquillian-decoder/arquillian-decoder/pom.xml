@@ -12,187 +12,187 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- Model Version -->
-    <modelVersion>4.0.0</modelVersion>
+  <!-- Model Version -->
+  <modelVersion>4.0.0</modelVersion>
 
-    <!-- Parent -->
-    <parent>
-        <groupId>org.jboss</groupId>
-        <artifactId>jboss-parent</artifactId>
-        <version>14</version>
-        <relativePath />
-    </parent>
+  <!-- Parent -->
+  <parent>
+    <groupId>org.jboss</groupId>
+    <artifactId>jboss-parent</artifactId>
+    <version>14</version>
+    <relativePath/>
+  </parent>
 
-    <!-- Artifact Configuration -->
-    <groupId>org.arquillian.extension</groupId>
-    <artifactId>arquillian-decoder-parent</artifactId>
-    <version>1.0.0.Alpha1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  <!-- Artifact Configuration -->
+  <groupId>org.arquillian.extension</groupId>
+  <artifactId>arquillian-decoder-parent</artifactId>
+  <version>1.0.0.Alpha1-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <name>Arquillian Decoder Parent</name>
-    <description>Arquillian Decoder aggregator</description>
-    <url>http://arquillian.org/</url>
-    <inceptionYear>2015</inceptionYear>    
+  <name>Arquillian Decoder Parent</name>
+  <description>Arquillian Decoder aggregator</description>
+  <url>http://arquillian.org/</url>
+  <inceptionYear>2015</inceptionYear>
 
-    <!-- Licenses -->
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
+  <!-- Licenses -->
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
 
-    <!-- Developers -->
-    <developers>
-        <developer>
-            <name>Stefan Miklosovic</name>
-            <email>smikloso@redhat.com</email>
-        </developer>
-    </developers>
+  <!-- Developers -->
+  <developers>
+    <developer>
+      <name>Stefan Miklosovic</name>
+      <email>smikloso@redhat.com</email>
+    </developer>
+  </developers>
 
-    <!-- SCM -->
-    <scm>
-        <connection>scm:git:git://git@github.com:arquillian/arquillian-decoder.git</connection>
-        <developerConnection>scm:git:ssh://github.com/arquillian/arquillian-decoder.git</developerConnection>
-        <url>git://github.com/arquillian/arquillian-decoder.git</url>
-        <tag>HEAD</tag>
-    </scm>
+  <!-- SCM -->
+  <scm>
+    <connection>scm:git:git://git@github.com:arquillian/arquillian-decoder.git</connection>
+    <developerConnection>scm:git:ssh://github.com/arquillian/arquillian-decoder.git</developerConnection>
+    <url>git://github.com/arquillian/arquillian-decoder.git</url>
+    <tag>HEAD</tag>
+  </scm>
 
-    <!-- Issues -->
-    <issueManagement>
-        <system>jira</system>
-        <url>https://issues.jboss.org/browse/ARQ</url>
-    </issueManagement>
+  <!-- Issues -->
+  <issueManagement>
+    <system>jira</system>
+    <url>https://issues.jboss.org/browse/ARQ</url>
+  </issueManagement>
 
-    <!-- Properties -->
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <!-- Properties -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Arquillian Core -->
-        <version.arquillian.core>1.1.6.Final</version.arquillian.core>
+    <!-- Arquillian Core -->
+    <version.arquillian.core>1.1.6.Final</version.arquillian.core>
 
-        <!-- Other versions -->
-        <version.junit>4.12</version.junit>
-        <version.mockito>1.10.19</version.mockito>
-        <version.hamcrest>1.0.0.0</version.hamcrest>
-        <version.maven.animal.sniffer>1.13</version.maven.animal.sniffer>
-        <version.signature>1.1</version.signature>
+    <!-- Other versions -->
+    <version.junit>4.12</version.junit>
+    <version.mockito>1.10.19</version.mockito>
+    <version.hamcrest>1.0.0.0</version.hamcrest>
+    <version.maven.animal.sniffer>1.13</version.maven.animal.sniffer>
+    <version.signature>1.1</version.signature>
 
-        <maven.compiler.target>1.6</maven.compiler.target>
-        <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.6</maven.compiler.source>
 
-        <maven.compiler.argument.target>1.6</maven.compiler.argument.target>
-        <maven.compiler.argument.source>1.6</maven.compiler.argument.source>
-    </properties>
+    <maven.compiler.argument.target>1.6</maven.compiler.argument.target>
+    <maven.compiler.argument.source>1.6</maven.compiler.argument.source>
+  </properties>
 
-    <!-- Modules -->
-    <modules>
-        <module>spi</module>
-        <module>api</module>
-        <module>impl</module>
-        
-        <!-- Implementations -->
+  <!-- Modules -->
+  <modules>
+    <module>spi</module>
+    <module>api</module>
+    <module>impl</module>
 
-        <module>jira</module>
-    </modules>
+    <!-- Implementations -->
 
-    <!-- Dependency managemet -->
-    <dependencyManagement>
+    <module>jira</module>
+  </modules>
 
-        <!-- Arquillian -->
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>${version.arquillian.core}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+  <!-- Dependency managemet -->
+  <dependencyManagement>
 
-            <!-- External Projects -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${version.junit}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>${version.mockito}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-junit</artifactId>
-                <version>${version.hamcrest}</version>
-            </dependency>
+    <!-- Arquillian -->
+    <dependencies>
+      <dependency>
+        <groupId>org.jboss.arquillian</groupId>
+        <artifactId>arquillian-bom</artifactId>
+        <version>${version.arquillian.core}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
 
-        </dependencies>
-    </dependencyManagement>
+      <!-- External Projects -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${version.junit}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
+        <version>${version.mockito}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-junit</artifactId>
+        <version>${version.hamcrest}</version>
+      </dependency>
 
-    <!-- Build -->
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <version>${version.maven.animal.sniffer}</version>
-                <executions>
-                    <execution>
-                        <id>signature-check</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <signature>
-                        <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java16</artifactId>
-                        <version>${version.signature}</version>
-                    </signature>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <pushChanges>false</pushChanges>
-                    <localCheckout>true</localCheckout>
-                </configuration>
-            </plugin>
-        </plugins>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-project-info-reports-plugin</artifactId>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+    </dependencies>
+  </dependencyManagement>
 
-    <!-- Reporting -->
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                        <id>aggregate</id>
-                        <reports>
-                            <report>aggregate</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
+  <!-- Build -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>animal-sniffer-maven-plugin</artifactId>
+        <version>${version.maven.animal.sniffer}</version>
+        <executions>
+          <execution>
+            <id>signature-check</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <signature>
+            <groupId>org.codehaus.mojo.signature</groupId>
+            <artifactId>java16</artifactId>
+            <version>${version.signature}</version>
+          </signature>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <!-- Reporting -->
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <reportSets>
+          <reportSet>
+            <id>aggregate</id>
+            <reports>
+              <report>aggregate</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>

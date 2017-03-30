@@ -1,161 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.jboss.arquillian.showcase</groupId>
-        <artifactId>arquillian-showcase-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../parent/pom.xml</relativePath>
-    </parent>
+  <parent>
+    <groupId>org.jboss.arquillian.showcase</groupId>
+    <artifactId>arquillian-showcase-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../parent/pom.xml</relativePath>
+  </parent>
 
-    <artifactId>arquillian-showcase-ejb</artifactId>
-    <packaging>jar</packaging>
-    <name>Arquillian Showcase: EJB</name>
-    <description>Examples that demonstrate how to test EJB components using Arquillian</description>
+  <artifactId>arquillian-showcase-ejb</artifactId>
+  <packaging>jar</packaging>
+  <name>Arquillian Showcase: EJB</name>
+  <description>Examples that demonstrate how to test EJB components using Arquillian</description>
 
-    <repositories>
-        <repository>
-            <id>apache-snapshots-repository</id>
-            <name>Apache Snapshots Repository</name>
-            <url>https://repository.apache.org/content/groups/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+  <repositories>
+    <repository>
+      <id>apache-snapshots-repository</id>
+      <name>Apache Snapshots Repository</name>
+      <url>https://repository.apache.org/content/groups/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 
-    <dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>org.jboss.arquillian.junit</groupId>
+      <artifactId>arquillian-junit-container</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>arq-openejb-embedded-3.1</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
         <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>container-bom-openejb-embedded-3.1</artifactId>
+          <type>pom</type>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <excludes>
+                <exclude>com/acme/ejb/TemperatureConverterTestCase.java</exclude>
+                <exclude>com/acme/ejb/calc/MortgageCalculatorEnvEntryTestCase.java</exclude>
+              </excludes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>arq-openejb-embedded-4</id>
+      <dependencies>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>container-bom-openejb-embedded-4</artifactId>
+          <type>pom</type>
+          <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+          <groupId>org.apache.openejb</groupId>
+          <artifactId>openejb-core</artifactId>
+          <version>${version.openejb_4}</version>
+          <scope>test</scope>
         </dependency>
-    </dependencies>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <excludes>
+                <!-- change return value in @Deployment method from war to jar to pass this test -->
+                <exclude>com/acme/ejb/calc/MortgageCalculatorEnvEntryTestCase.java</exclude>
+              </excludes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
 
-    <profiles>
-        <profile>
-            <id>arq-openejb-embedded-3.1</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>container-bom-openejb-embedded-3.1</artifactId>
-                    <type>pom</type>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <excludes>
-                                <exclude>com/acme/ejb/TemperatureConverterTestCase.java</exclude>
-                                <exclude>com/acme/ejb/calc/MortgageCalculatorEnvEntryTestCase.java</exclude>
-                            </excludes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+    <profile>
+      <id>arq-jbossas-managed-7</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.jboss.as</groupId>
+          <artifactId>jboss-as-arquillian-container-managed</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.jboss.spec</groupId>
+          <artifactId>jboss-javaee-web-6.0</artifactId>
+          <type>pom</type>
+        </dependency>
+      </dependencies>
+    </profile>
 
-        <profile>
-            <id>arq-openejb-embedded-4</id>
-            <dependencies>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>container-bom-openejb-embedded-4</artifactId>
-                    <type>pom</type>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.openejb</groupId>
-                    <artifactId>openejb-core</artifactId>
-                    <version>${version.openejb_4}</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <excludes>
-                                <!-- change return value in @Deployment method from war to jar to pass this test -->
-                                <exclude>com/acme/ejb/calc/MortgageCalculatorEnvEntryTestCase.java</exclude>
-                            </excludes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+    <profile>
+      <id>arq-jbossas-remote-7</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.jboss.as</groupId>
+          <artifactId>jboss-as-arquillian-container-remote</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.jboss.spec</groupId>
+          <artifactId>jboss-javaee-web-6.0</artifactId>
+          <type>pom</type>
+        </dependency>
+      </dependencies>
+    </profile>
 
-        <profile>
-            <id>arq-jbossas-managed-7</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-arquillian-container-managed</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.jboss.spec</groupId>
-                    <artifactId>jboss-javaee-web-6.0</artifactId>
-                    <type>pom</type>
-                </dependency>
-            </dependencies>
-        </profile>
+    <profile>
+      <id>arq-glassfish-embedded</id>
+      <dependencies>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>container-bom-glassfish-embedded-3.1</artifactId>
+          <type>pom</type>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+    </profile>
 
-        <profile>
-            <id>arq-jbossas-remote-7</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.jboss.spec</groupId>
-                    <artifactId>jboss-javaee-web-6.0</artifactId>
-                    <type>pom</type>
-                </dependency>
-            </dependencies>
-        </profile>
+    <profile>
+      <id>arq-glassfish-remote</id>
+      <dependencies>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>container-bom-glassfish-remote-3.1</artifactId>
+          <type>pom</type>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+    </profile>
 
-        <profile>
-            <id>arq-glassfish-embedded</id>
-            <dependencies>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>container-bom-glassfish-embedded-3.1</artifactId>
-                    <type>pom</type>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>arq-glassfish-remote</id>
-            <dependencies>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>container-bom-glassfish-remote-3.1</artifactId>
-                    <type>pom</type>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-
-    </profiles>
-<!--
-vi:ts=4:sw=4:expandtab:
--->
+  </profiles>
+  <!--
+  vi:ts=4:sw=4:expandtab:
+  -->
 </project>

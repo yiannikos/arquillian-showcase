@@ -12,109 +12,109 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <!-- Model version -->
-    <modelVersion>4.0.0</modelVersion>
+  <!-- Model version -->
+  <modelVersion>4.0.0</modelVersion>
 
-    <!-- Artifact configuration -->
-    <groupId>org.arquillian.junit</groupId>
-    <artifactId>arquillian-junit-jira-test-01</artifactId>
-    <version>0.1-SNAPSHOT</version>
+  <!-- Artifact configuration -->
+  <groupId>org.arquillian.junit</groupId>
+  <artifactId>arquillian-junit-jira-test-01</artifactId>
+  <version>0.1-SNAPSHOT</version>
 
-    <!-- Properties -->
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <!-- Properties -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <version.arquillian.core>1.1.6.Final</version.arquillian.core>
-        <version.arquillian.decoder>1.0.0.Alpha1-SNAPSHOT</version.arquillian.decoder>
-        <version.junit>4.12</version.junit>
+    <version.arquillian.core>1.1.6.Final</version.arquillian.core>
+    <version.arquillian.decoder>1.0.0.Alpha1-SNAPSHOT</version.arquillian.decoder>
+    <version.junit>4.12</version.junit>
 
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
 
-    </properties>
+  </properties>
 
-    <!-- Dependency Management -->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>${version.arquillian.core}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.arquillian.extension</groupId>
-                <artifactId>arquillian-decoder-jira</artifactId>
-                <version>${version.arquillian.decoder}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <scope>test</scope>
-                <version>${version.junit}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <!-- Dependencies -->
+  <!-- Dependency Management -->
+  <dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>org.arquillian.extension</groupId>
-            <artifactId>arquillian-decoder-jira</artifactId>
-            <scope>test</scope>
-            </dependency>    
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
+      <dependency>
+        <groupId>org.jboss.arquillian</groupId>
+        <artifactId>arquillian-bom</artifactId>
+        <version>${version.arquillian.core}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.arquillian.extension</groupId>
+        <artifactId>arquillian-decoder-jira</artifactId>
+        <version>${version.arquillian.decoder}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <scope>test</scope>
+        <version>${version.junit}</version>
+      </dependency>
     </dependencies>
+  </dependencyManagement>
 
-    <!-- Build -->
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <executions>
-                    <execution>
-                        <phase>process-test-resources</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18</version>
-            </plugin>
-        </plugins>
-        <!-- for filtering properties from this pom into arquillian.xml -->
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </testResource>
-        </testResources>
-    </build>
+  <!-- Dependencies -->
+  <dependencies>
+    <dependency>
+      <groupId>org.arquillian.extension</groupId>
+      <artifactId>arquillian-decoder-jira</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.junit</groupId>
+      <artifactId>arquillian-junit-container</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!-- Build -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          <execution>
+            <phase>process-test-resources</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.2</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.18</version>
+      </plugin>
+    </plugins>
+    <!-- for filtering properties from this pom into arquillian.xml -->
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </testResource>
+    </testResources>
+  </build>
 
 </project>
