@@ -29,7 +29,7 @@
 
   <!-- Properties -->
   <properties>
-    <version.atlassian.jira>2.0.0-m31</version.atlassian.jira>
+    <version.atlassian.jira>5.1.2-2bd0a62e</version.atlassian.jira>
     <version.jersey.client>1.5</version.jersey.client>
     <version.hamcrest>1.0.0.0</version.hamcrest>
   </properties>
