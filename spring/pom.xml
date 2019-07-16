@@ -37,7 +37,7 @@
 
     <!-- Arquillian version -->
     <version.arquillian>1.0.2.Final</version.arquillian>
-    <version.arquillian.spring>1.0.0.Beta1</version.arquillian.spring>
+    <version.arquillian.spring>1.0.0.Beta3</version.arquillian.spring>
     <version.arquillian.transaction>1.0.0.Alpha1</version.arquillian.transaction>
 
     <!-- Test related -->
