@@ -45,7 +45,7 @@
     <version.openwebbeans>1.1.1</version.openwebbeans>
     <version.resin>4.0.20</version.resin>
     <version.resteasy>2.0.1.GA</version.resteasy>
-    <version.slf4j>1.5.10</version.slf4j>
+    <version.slf4j>1.7.26</version.slf4j>
     <version.testng>5.14.6</version.testng>
     <version.tomcat>6.0.29</version.tomcat>
     <version.weld_core>1.1.1.Final</version.weld_core>
